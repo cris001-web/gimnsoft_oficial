@@ -1,0 +1,38 @@
+.centrar {
+display: flex;
+justify-content: center;
+align-content: center;
+flex-direction: column;
+}
+.titulo{
+font-family: 'Black Ops One', cursive;
+background: linear-gradient(45deg, #ff0303, #000000f5);
+color: white;
+font-size: -webkit-xxx-large;
+letter-spacing: 15px;
+}
+.tie{
+font-size: 100px;
+}
+.tablero{
+display: inherit;
+}
+.dos{
+ 
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+}
+.botones{
+	position: relative;
+    bottom: 290px;
+}
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}

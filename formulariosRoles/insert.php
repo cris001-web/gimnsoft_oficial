@@ -6,12 +6,12 @@
 		 		include("../config/class.conexion.php");
 		 		$id=$_POST['id'];
 		 		$rol_descripcion=$_POST['rol_descripcion'];
-		 		$select_tipo=$_POST['select_tipo'];
-		 		echo $select_tipo;
+		 		
+		 		
 		 		
 				
 
-				$insert = "INSERT INTO roles (id,rol_descripcion,select_tipo) values ('$id =''','$rol_descripcion','$select_tipo')"; 
+				$insert = "INSERT INTO roles (id,rol_descripcion) values ('$id =''','$rol_descripcion')"; 
 				$resultado= mysqli_query($conexion,$insert);
 					if ($resultado) {
 ?>

@@ -7,6 +7,7 @@
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="../bootstrap4/css/bootstrap.min.css">
 </head>
+<?php include("../menu.html");?>
 <body>
 	<div class="container">
 		<table class="table table-dark">

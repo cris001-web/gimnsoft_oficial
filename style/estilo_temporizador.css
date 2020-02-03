@@ -1,0 +1,200 @@
+.class_body{
+	background-color: #e9ecef;
+}
+.centrar {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+}
+.titulo{
+	font-family: 'Black Ops One', cursive;
+	background: linear-gradient(45deg, #ff0303, #000000f5);
+	color: white;
+	font-size: -webkit-xxx-large;
+	letter-spacing: 15px;
+}
+.numero{
+	background: white;
+    border-radius: 8px;
+    box-shadow: 2px 1px 7px 1px black;
+}
+.tie{
+	font-size: 100px;
+}
+.tablero{
+	display: inherit;
+}
+.dos{
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color:#01263c;
+	color: white;
+	text-align: center;
+}
+.izquierda{
+	float: left;
+}
+.derecha{
+	float: right;
+}
+.centro{
+	width: 70px;
+	margin:0 auto;
+}
+
+@media(max-width: 640px){
+.numero{
+	height: 250px;
+    margin-top: 23px;
+}
+.tie{
+	position: relative;
+    top: 45px;
+    font-size: 80px;
+}
+.botones{
+	text-align: center;
+	width: 250px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.boton{
+	width: -webkit-fill-available;
+    margin-bottom: 4px;
+    height: 34px;
+}
+.Dimg_izq{
+	position: relative;
+    bottom: 150px;
+}
+.Dimg_dere{
+	position: relative;
+    bottom: 238px;
+}
+.im_izq{
+	width: 87px;
+}
+.im_dere{
+	width: 87px;
+}
+.footer{
+	font-size: 12px;
+}
+}
+
+@media(min-width: 640px){
+.numero{
+	margin-top: 12px;
+    height: 200px;
+}
+.tie{
+	position: relative;
+    top: 40px;
+    font-size: 90px;
+}
+.tablero{
+	position: relative;
+    right: 12px;
+    margin-top: 12px;
+    margin-bottom: 35px;
+    font-size: larger;
+    
+}
+.izquierda{
+	margin-left: 60px;
+}
+.derecha{
+	margin-right: 60px;
+}
+.botones{
+	text-align: center;
+	width: 250px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.boton{
+	width: -webkit-fill-available;
+    margin-bottom: 4px;
+}
+.Dimg_izq{
+	position: relative;
+    bottom: 170px;
+}
+.Dimg_dere{
+	position: relative;
+    bottom:368px;
+}
+.im_izq{
+	width: 200px;
+}
+.im_dere{
+	width: 200px;
+}
+.footer{
+	font-size: 12px;
+}
+@media(min-width: 820px){
+.numero{
+	height: 200px;
+    margin-top: 12px;
+}
+.izquierda{
+	margin-left: 150px;
+}
+.derecha{
+	margin-right: 150px;
+}
+.botones{
+	display: flex;
+    justify-content: center;
+}
+.Dimg_izq{
+	position: relative;
+    bottom: 46px;
+}
+.Dimg_dere{
+	position: relative;
+    bottom:239px;
+}
+.im_izq{
+	width: 200px;
+}
+.im_dere{
+	width: 200px;
+}
+.boton{
+	margin-right: 10px;
+}
+}
+
+@media(min-width:1024px){
+.izquierda{
+	margin-left: 190px;
+}
+.derecha{
+	margin-right: 190px;
+}
+.Dimg_izq{
+	position: relative;
+    bottom: 100px;
+}
+.im_izq{
+	width: 220px;
+}
+.Dimg_dere{
+	position: relative;
+    bottom:320px;
+}
+.im_dere{
+	width: 220px;
+}
+}
