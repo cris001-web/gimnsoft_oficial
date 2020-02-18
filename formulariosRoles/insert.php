@@ -45,7 +45,7 @@
 		<div class="form-group mx-2 mt-5">
 			<input type="text" class="form-control" name="rol_descripcion" id="rol_descripcion" placeholder="Ingrese Rol Ej.: Administrador o Usuario">
 		</div>
-		<input type="submit"  value="Guardar" class="btn btn-primary btn-lg my-5 mx-2" onclick="return insertRol();">
+		<input type="submit"  value="Guardar" class="btn btn-primary btn-lg my-5 mx-2" onclick="return validarCampoRoles();">
 	 
 	</form>
 </div>	
