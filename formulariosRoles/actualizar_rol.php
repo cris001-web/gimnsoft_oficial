@@ -1,9 +1,11 @@
 <?php
 include("../config/class.conexion.php");
 //si esta correcto
+$var_post=0;
 if (!empty($_POST)) {
+	$var_post=1;
 	if (!empty($_POST['rol_descripcion'])) {
-		echo "todos los campos estan llenos";
+		echo "todos los campos estan llenos".'<br>';
 
 		$id=$_POST['id'];
 		$rol_descripcion=$_POST['rol_descripcion'];
@@ -11,50 +13,55 @@ if (!empty($_POST)) {
 
 		//verificon con query si existe rol_descripcion con ese id
 		$sqll=mysqli_query($conexion, "SELECT id, rol_descripcion FROM roles WHERE rol_descripcion='$rol_descripcion' ");
-		echo "SELECT id, rol_descripcion FROM roles WHERE rol_descripcion='$rol_descripcion'";
+		echo "SELECT id, rol_descripcion FROM roles WHERE rol_descripcion='$rol_descripcion'".'<br>';
 		
 		$filas=mysqli_num_rows($sqll);
-		//echo $filas;
+		echo $filas.'filas ';
 			if ($filas>0) {
-				echo "no se puede actualizar";
-				echo "<br>"."UPDATE roles SET id=$id, rol_descripcion='$rol_descripcion' WHERE id=$id";
+				 echo('<p class="alert alert-warning alert-success fade show">EL REGISTRO YA EXISTE</p>');
+				//echo "<br>"."UPDATE roles SET id=$id, rol_descripcion='$rol_descripcion' WHERE id=$id";
+
 			}else{
-				echo "<br>"."UPDATE roles SET id=$id, rol_descripcion='$rol_descripcion' WHERE id=$id";
-				$sql_update=mysqli_query($conexion,"UPDATE roles SET id=$id, rol_descripcion='$rol_descripcion' WHERE id=$id");
+				echo "SE PUEDE ACTUALIZAR".'<br>';
+				echo "<br>"."UPDATE roles SET id=$id, rol_descripcion='$rol_descripcion' WHERE id=$id".'<br>';
+				$sql_update=mysqli_query($conexion,"UPDATE roles SET id='$id', rol_descripcion='$rol_descripcion' WHERE id='$id'");
 
 				if ($sql_update) {
-					echo "se actualizo";
+					echo('<p class="alert alert-warning alert-success fade show">SE ACTUALIZO</p>');
 				}else{
-					echo "no se actualizo";
+					echo('<p class="alert alert-warning alert-success fade show">NO SE ACTUALIZO</p>');
 				}
 			}
+			
 	}
 }
-//mostrar id q no sea enviado vacio
- if (empty($_GET['id'])) {//si no existe redirecciona
-	//echo "enmtrooo";
-	echo "id vacia";
-	//header('Location:listar.php');
-}
+// //mostrar id q no sea enviado vacio
+echo 'var_post'. $var_post.'<br>';
+ if (empty($_REQUEST['id'] )) {//si no existe redirecciona
+// 	//echo "enmtrooo";
+	
+// 	//header('Location:listar.php');
+	echo "id vacia, NO SE INGRESO ID".'<br>';
+ }
 
-//verificar que id este con valores
- $id= $_GET['id'];
-
+// //verificar que id este con valores
+  $id= $_REQUEST['id'];//obtengo lo que estoy enviando desde la URL
+// //SQL PARA MOSTRAR EL REGISTRO
  $sql = mysqli_query($conexion, "SELECT id, rol_descripcion FROM roles WHERE id=$id");
 
 $result_fila_sql= mysqli_num_rows($sql);// cuento cuantas filas hay en sql
 
- if ($result_fila_sql ==0) {//no hay registro 
-	header('Location:listar.php');
-//     echo 'no hay tabla';
-}else{//si hay toma los registro para mostrarlo
-$option="";
-	while ($data = mysqli_fetch_array($sql)) {
-	  	$id = $data['id'];
-	  	$rol_descripcion=$data['rol_descripcion'];
-	 
-	}
-  }
+	if ($result_fila_sql ==0) {//no hay registro 
+ 		//header('Location:listar.php');
+ 	//echo 'NO HAY REGISTRO'.'<br>';
+ 	}else{//si hay toma los registro para mostrarlo
+ 	$option="";
+ 		while ($data = mysqli_fetch_array($sql)) {
+ 		  	$id = $data['id'];
+ 		  	$rol_descripcion=$data['rol_descripcion'];
+		 
+ 		}
+ 	}
 
 
 

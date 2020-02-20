@@ -26,7 +26,7 @@
 				if ($filas>0) {
 					while ($data = mysqli_fetch_array($query)){
 						//$id=$data['id'];
-				?>		
+					?>		
 						<tr>
 						      
 						      <td><?php echo $data['id'] ?></td>

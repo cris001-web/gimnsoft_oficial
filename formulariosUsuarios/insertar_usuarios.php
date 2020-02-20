@@ -127,10 +127,10 @@ include("../config/class.conexion.php");
 			<input type="text" class="form-control " name="barrio" id="barrio" placeholder="Barrio del Cliente">
 			<input type="text" class="form-control " name="localidad" id="localidad" placeholder="Ingrese Ciudad del Cliente">
 			<div id="imagePreview" style="text-align: center;">
-				<img src="../imagen/users.png">
+				<img src="../imagen/users.png" >
 			</div>
 			<div class="photo" >
-				<input type="file" name="imagen" id="imagen" />
+				<input type="file" name="imagen" id="imagen" width="100" />
 			</div>
 			
 			<input type="submit"  value="Guardar" class="btn btn-primary btn-lg my-5 mx-2" onclick=" return validarCampoUsuarios();" >
