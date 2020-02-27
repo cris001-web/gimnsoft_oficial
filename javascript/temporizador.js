@@ -1,6 +1,9 @@
 audio = new Audio("../alarma/alar.mp3");
-var ban=0;
-		function Empezar(){
+
+var n=0;
+	function Empezar(){
+	 n=1;
+	alert(n);
 			audio.pause();
 			audio.currentTime=0;
 
@@ -14,6 +17,7 @@ var ban=0;
 						this.play();
 					},false);
 					audio.play();
+					//setTimeout('Pausa_Alarma',20000);
 					ban=1;
 					$('#Tiempo').css('color', 'white');
 					$('#numm').css('background-color', 'rgb(226, 5, 36)');
@@ -24,17 +28,24 @@ var ban=0;
 			});
 		
 		}
+
+		
 		
 		
 		function Pausa(){
 			$('#Tiempo').timer('pause');
 		}
 		function Renaudar(){
+			
 			$('#Tiempo').timer('resume');
+		
 		}
 		function Pausa_Alarma(){
-			audio.pause();
-			$('#numm').css('background-color', 'white');
-			$('#Tiempo').css('color', 'black');
+
+				audio.pause();
+				$('#numm').css('background-color', 'white');
+				$('#Tiempo').css('color', 'black');
 			
 		}
+
+	//setTimeout('Pausa_Alarma',2000);

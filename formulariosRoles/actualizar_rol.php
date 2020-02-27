@@ -1,9 +1,9 @@
 <?php
 include("../config/class.conexion.php");
 //si esta correcto
-$var_post=0;
+
 if (!empty($_POST)) {
-	$var_post=1;
+	
 	if (!empty($_POST['rol_descripcion'])) {
 		echo "todos los campos estan llenos".'<br>';
 
@@ -36,7 +36,7 @@ if (!empty($_POST)) {
 	}
 }
 // //mostrar id q no sea enviado vacio
-echo 'var_post'. $var_post.'<br>';
+
  if (empty($_REQUEST['id'] )) {//si no existe redirecciona
 // 	//echo "enmtrooo";
 	
@@ -44,7 +44,7 @@ echo 'var_post'. $var_post.'<br>';
 	echo "id vacia, NO SE INGRESO ID".'<br>';
  }
 
-// //verificar que id este con valores
+// //verificar que id este con registro
   $id= $_REQUEST['id'];//obtengo lo que estoy enviando desde la URL
 // //SQL PARA MOSTRAR EL REGISTRO
  $sql = mysqli_query($conexion, "SELECT id, rol_descripcion FROM roles WHERE id=$id");
