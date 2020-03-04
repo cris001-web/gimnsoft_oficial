@@ -22,16 +22,16 @@
 
 			<!-- consulta para llenar tabla -->
 			<?php
-				$query_usuario = mysqli_query($conexion,"SELECT  usuarios.nombre_usuario,usuarios.email, usuarios.activo, usuarios.rol_id,roles.rol_descripcion,clientes.id, clientes.nombre,clientes.apellido,clientes.foto FROM usuarios INNER JOIN roles on usuarios.rol_id=roles.id INNER JOIN clientes ON usuarios.id=clientes.usuario_id");
+				$query_usuario = mysqli_query($conexion,"SELECT (usuarios.id) as id_u, usuarios.nombre_usuario,usuarios.email, usuarios.activo, usuarios.rol_id,roles.rol_descripcion,(clientes.id) as id_c, clientes.nombre,clientes.apellido,clientes.foto FROM usuarios INNER JOIN roles on usuarios.rol_id=roles.id INNER JOIN clientes ON usuarios.id=clientes.usuario_id");
 				
-
+				echo "SELECT (usuarios.id) as id_u, usuarios.nombre_usuario,usuarios.email, usuarios.activo, usuarios.rol_id,roles.rol_descripcion,(clientes.id) as id_c, clientes.nombre,clientes.apellido,clientes.foto FROM usuarios INNER JOIN roles on usuarios.rol_id=roles.id INNER JOIN clientes ON usuarios.id=clientes.usuario_id";
 				//devuelve cantidad de filas
 				$filas_usuarios= mysqli_num_rows($query_usuario);
 		
 
 				if ($filas_usuarios>0 ) {
 					while ($data_usuario = mysqli_fetch_array($query_usuario)) {
-						$id= $data_usuario['id'];
+						$id_usuario= $data_usuario['id_u'];
 						$ruta_img=$data_usuario['foto'];
 
 						
@@ -54,9 +54,9 @@
 						<td><?php echo $data_usuario['apellido']?></td>
 						<td><img src="../uploads/<?php echo $ruta_img; ?>" width="100"/></td>
 						<td>
-							<a href="../formulariosUsuarios/actualizar_usuarios.php?id=<?php echo $data_usuario['id']; ?>"><button type="button" class="btn btn-primary">Editar</button></a>
+							<a href="../formulariosUsuarios/actualizar_usuarios.php?id_usuario_get=<?php echo $data_usuario['id_u']; ?>"><button type="button" class="btn btn-primary">Editar</button></a>
 
-							<input type="hidden" id="php_id" value="<?php echo $id; ?>"/>
+							<input type="hidden" id="php_id" value="<?php echo $id_u; ?>"/>
 						</td>
 						
 

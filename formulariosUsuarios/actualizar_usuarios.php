@@ -1,125 +1,104 @@
-<?php
+<?php 
 include("../config/class.conexion.php");
 if (!empty($_POST)) {
-	
-	$id_usuarios=$_POST['id_usuarios'];
-	$nombre_usuario=$_POST['nombre_usuario'];
-	$email=$_POST['email'];
-	$contraseña=$_POST['contraseña'];
-	$activo=$_POST['activo'];
-
-	$id_clientes=$_POST['id_clientes'];
+	$id_clientes=$_POST['id_c'];
+	echo('id_clientes'.$id_clientes.'<BR>');
 	$nombre=$_POST['nombre'];
 	$apellido=$_POST['apellido'];
 	$calle=$_POST['calle'];
 	$barrio=$_POST['barrio'];
 	$localidad=$_POST['localidad'];
-	
+	$ruta_img=$_POST['foto'];
 
-	echo("SELECT * FROM usuarios WHERE (nombre_usuario='$nombre_usuario' AND id !='$id_usuarios') or (email='$email' AND id !='$id_usuarios')");
-	$query_verifico=mysqli_query($conexion,"SELECT * FROM usuarios WHERE (nombre_usuario='$nombre_usuario' AND id !='$id_usuarios') or (email='$email' AND id !='$id_usuarios')");
-	
-	$result_filas_verifico=mysqli_num_rows($query_verifico);
-	if ($result_filas_verifico==0) {
+	$id_usuarios=$_POST['id_u'];
+	echo('id_usuarios'.$id_usuarios);
+	$email=$_POST['email'];
+	$contraseña=$_POST['contraseña'];
+	$activo=$_POST['activo'];
+	$nombre_usuario=$_POST['nombre_usuario'];
 
-		//codigo de foto
-		$nombre_imagen=$_FILES['imagen']['name'];
-		$tipo_imagen  =$_FILES['imagen'] ['type'];
-		$tamagno_imagen  =$_FILES['imagen'] ['size'];
+	//codigo de foto
+	$nombre_imagen=$_FILES['imagen']['name'];
+	$tipo_imagen  =$_FILES['imagen'] ['type'];
+ 	$tamagno_imagen  =$_FILES['imagen'] ['size'];
 
-		$carpeta_destino=$_SERVER['DOCUMENT_ROOT']. '../gimnsoftware/uploads/';
-		move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$nombre_imagen);
-
-
-		//echo " puede actualizar existe correo".$result_filas_verifico.'<br>'."UPDATE clientes SET id_clientes='$id_clientes', nombre='$nombre',apellido='$apellido',calle='$calle',barrio='$barrio',localidad='$localidad',foto='$nombre_imagen' WHERE id='$id_clientes'";
-		
-
-		$query_update_cliente=mysqli_query($conexion, "UPDATE clientes SET id='$id_clientes', nombre='$nombre',apellido='$apellido',calle='$calle',barrio='$barrio',localidad='$localidad',foto='$nombre_imagen' WHERE id='$id_clientes'");
+ 	$carpeta_destino=$_SERVER['DOCUMENT_ROOT']. '../gimnsoftware/uploads/';
+ 	move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$nombre_imagen);
 
 
-		//verifico que se ejecute query cliente correcto
-		if ($query_update_cliente ) {
-			//echo 'update usuarios '."UPDATE usuarios SET id='$id_usuarios',nombre_usuario='$nombre_usuario',email='$email',contraseña='$contraseña',activo='$activo'";
+		//verifico que el nombre de usuario y correo no esten en la bd
+		$query_verifico=mysqli_query($conexion,"SELECT (id) as id_u, nombre_usuario,email FROM usuarios WHERE (									nombre_usuario='$nombre_usuario' AND id !='$id_usuarios') or 
+											(email='$email' AND id !='$id_usuarios')");
 
-		$query_update_usuario=mysqli_query($conexion,"UPDATE usuarios SET id='$id_usuarios',nombre_usuario='$nombre_usuario',email='$email',contraseña='$contraseña',activo='$activo' WHERE id='$id_usuarios'");
+		$result_filas_verifico=mysqli_num_rows($query_verifico);
+		if ($result_filas_verifico==0) {
+			echo " puede actualizar no existe correo".'<BR>';
+
+			//actualizo clientes
+
+			$query_update_clientes=mysqli_query($conexion,"UPDATE clientes SET id='$id_clientes', nombre='$nombre',apellido='$apellido',calle='$calle',barrio='$barrio',localidad='$localidad',foto='$nombre_imagen' WHERE id='$id_clientes'");
+
+				//verifico que query cliebntes sea correcto y si es hago query usuarios
+				if ($query_update_clientes) {
+					//echo "QUERY clientes CORRECTO".'<BR>';
+					$query_update_usuarios=mysqli_query($conexion,"UPDATE usuarios SET id='$id_usuarios',nombre_usuario='$nombre_usuario',email='$email',contraseña='$contraseña',activo='$activo' WHERE id='$id_usuarios'");
+
+						if ($query_update_usuarios) {
+							echo "QUERY  usuarios CORRECTO".'<BR>';
+						}else{
+							echo "NO SE PUDO ACTUALIZAR".'<BR>';
+						}	
+				
+
+				}else{
+					echo "NO SE PUDO ACTUALIZAR".'<BR>';
+				}
 		}else{
-			//echo('<p class="alert alert-warning fade show"> ERROR  QUERY usuarios</p>');
+			echo "EXISTE CORREO";
 		}
-
-		//verifico que se ejecute query cliente correcto
-		if ($query_update_usuario ) {
-		echo('<p class="alert alert-success fade show"> actualizacion correcta</p>');
-		}else{
-			echo('<p class="alert alert-warning fade show"> ERROR NO SE ACTUALIZO</p>');
-		}
-		
-
-
-	}else{
-		echo('<p class="alert alert-warning fade show"> ERROR NO SE ACTUALIZO, YA EXISTE UN CORREO O NOMBRE DE USUARIO IGUAL</p>');
-	}
-    
-}
-
-
-//verifico que no se ingrese id vacio desde url
-if(empty($_REQUEST['id_usuarios'])) {
-	echo('<p class="alert alert-success alert-warning fade show">ERROR ID VACIA</p>');
-}
-
-//guardo id...verifico que haya registros para llenar campos
-$id=$_REQUEST['id'];
-
-$query=mysqli_query($conexion,"SELECT (c.id) as id_clientes, c.nombre,c.apellido,c.calle,c.barrio,
-								c.localidad,c.usuario_id,c.foto,(u.id) as id_usuarios, u.email,
-								u.contraseña,u.activo, u.nombre_usuario FROM clientes c INNER JOIN
-								usuarios u on c.usuario_id=u.id WHERE c.id='$id'");
-if ($query) {
-	echo "QUERY CORRECTO";
-}
-
-$result_fila_query=mysqli_num_rows($query);
-	if ($result_fila_query==0) {
 	
-		echo "CERO REGISTRO";
-	}else{
-		echo "HAY REGISTRO".'<br>';
-		
-		//guarda cada campo de la sql en variable
-		while ($data_c_u=mysqli_fetch_array($query)) {
 
-			$id_clientes=$data_c_u['id_clientes'];
-			$nombre=$data_c_u['nombre'];
-			$apellido=$data_c_u['apellido'];
-			$calle=$data_c_u['calle'];
-			$barrio=$data_c_u['barrio'];
-			$localidad=$data_c_u['localidad'];
-			$ruta_img=$data_c_u['foto'];
-
-			$id_usuarios=$data_c_u['id_usuarios'];
-			$email=$data_c_u['email'];
-			$contraseña=$data_c_u['contraseña'];
-			$activo=$data_c_u['activo'];
-			$nombre_usuario=$data_c_u['nombre_usuario'];
-
-		}
-		
-echo'muestra'.$nombre;
+}
 
 
 
 
 
 
+//VERIFICA SI ID VACIA Y CARGA DATOS A INPUTS
+if (!empty($_REQUEST['id_usuario_get'])) {
+	$id_usuario_get=$_REQUEST['id_usuario_get'];
+	//echo($id_usuario_get);
 
+	//echo "SELECT usuarios.id, usuarios.email, usuarios.contraseña,usuarios.activo,usuarios.nombre_usuario,					clientes.id, clientes.nombre,clientes.apellido,clientes.calle,clientes.barrio,			 				clientes.localidad,clientes.usuario_id,clientes.foto FROM usuarios INNER JOIN clientes on 				usuarios.id=clientes.usuario_id WHERE usuarios.id='$id_usuario_get'".'<br>';
+	$query=mysqli_query($conexion,"SELECT (usuarios.id) as id_u, usuarios.email, usuarios.contraseña,
+									usuarios.activo,usuarios.nombre_usuario,(clientes.id) as id_c, clientes.nombre,clientes.apellido,clientes.calle,clientes.barrio, clientes.localidad,clientes.usuario_id,clientes.foto FROM usuarios INNER JOIN clientes on usuarios.id=clientes.usuario_id WHERE usuarios.id='$id_usuario_get'");
 
+	//guarda cada campo de la sql en variable
+	 		while ($data_c_u=mysqli_fetch_array($query)) {
 
+	 			$id_clientes=$data_c_u['id_c'];
+	 			//echo('id_clientes'.$id_clientes.'<BR>');
+	 			$nombre=$data_c_u['nombre'];
+	 			$apellido=$data_c_u['apellido'];
+	 			$calle=$data_c_u['calle'];
+	 			$barrio=$data_c_u['barrio'];
+				$localidad=$data_c_u['localidad'];
+	 			$ruta_img=$data_c_u['foto'];
 
+				$id_usuarios=$data_c_u['id_u'];
+				//echo('id_usuarios'.$id_usuarios);
+	 			$email=$data_c_u['email'];
+	 			$contraseña=$data_c_u['contraseña'];
+	 			$activo=$data_c_u['activo'];
+	 			$nombre_usuario=$data_c_u['nombre_usuario'];
 
+	 		}
 
-	}
+}else{
+	echo('<p class="alert alert-success alert-warning fade show">ID VACIA</p>');
+}
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -138,7 +117,7 @@ echo'muestra'.$nombre;
 		<h2 class="text-white text-center" style="background: #6f6f6f">Actualizar Usuarios-Cliente</h2>
 
 		<div class="form-group mx-2 mt-3" >
-			<input type="hidden" name="id_usuarios" value="<?php echo $id_usuarios; ?>">
+			<input type="hidden" name="id_u" value="<?php echo $id_usuarios; ?>">
 
 			<input type="text" class="form-control " name="nombre_usuario" id="nombre_usuario" placeholder="Ingrese Nombre Usuario" value="<?php echo $nombre_usuario; ?>">
 
@@ -148,7 +127,7 @@ echo'muestra'.$nombre;
 
 			<label><input type="checkbox" class="form-check-input ml-1 m" name="activo" id="activo" placeholder="estado" value="1" style="position: relative;"> Estado de la persona</label><br>
 
-			<input type="hidden" name="id_clientes" value="<?php echo $id_clientes; ?>">
+			<input type="hidden" name="id_c" value="<?php echo $id_clientes; ?>">
 
 			<input type="text" class="form-control " name="nombre" id="nombre" placeholder="Ingrese Nombre del Cliente" value="<?php echo $nombre; ?>">
 

@@ -42,14 +42,14 @@ if (!empty($_POST)) {
 	
 // 	//header('Location:listar.php');
 	echo "id vacia, NO SE INGRESO ID".'<br>';
- }
+ }else{
 
 // //verificar que id este con registro
   $id= $_REQUEST['id'];//obtengo lo que estoy enviando desde la URL
 // //SQL PARA MOSTRAR EL REGISTRO
- $sql = mysqli_query($conexion, "SELECT id, rol_descripcion FROM roles WHERE id=$id");
+  $sql = mysqli_query($conexion, "SELECT id, rol_descripcion FROM roles WHERE id=$id");
 
-$result_fila_sql= mysqli_num_rows($sql);// cuento cuantas filas hay en sql
+  $result_fila_sql= mysqli_num_rows($sql);// cuento cuantas filas hay en sql
 
 	if ($result_fila_sql ==0) {//no hay registro 
  		//header('Location:listar.php');
@@ -62,7 +62,7 @@ $result_fila_sql= mysqli_num_rows($sql);// cuento cuantas filas hay en sql
 		 
  		}
  	}
-
+}
 
 
 ?>	 
