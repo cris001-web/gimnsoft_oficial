@@ -3,14 +3,14 @@
 if (!empty($_POST)) {
 	$id = $_POST['id'];
 	echo 'UGH'.$id;
-	$query_borrar = mysqli_query($conexion,"DELETE FROM roles WHERE id=$id");
+	$query_borrar = mysqli_query($conexion,"DELETE FROM roles WHERE id='$id'");
 	echo $query_borrar;
 		if ($query_borrar) {
-			echo "DELETE FROM roles WHERE id=$id";
+			echo "DELETE FROM roles WHERE id='$id'";
 			//header('location:listar.php');
 		}else{
 			echo "no se borro";
-			echo "DELETE FROM roles WHERE id=$id";
+			echo "DELETE FROM roles WHERE id='$id'";
 		}
 }
 if (empty($_REQUEST['id'])) {
@@ -20,7 +20,7 @@ if (empty($_REQUEST['id'])) {
 }else{
 	$id=$_REQUEST['id'];
 	//echo "id".$id;
-	$query = mysqli_query($conexion,"SELECT * FROM roles WHERE id=$id");
+	$query = mysqli_query($conexion,"SELECT * FROM roles WHERE id='$id'");
 
 	$row= mysqli_num_rows($query);
 	if ($row>0) {

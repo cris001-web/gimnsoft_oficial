@@ -56,6 +56,8 @@
 						<td>
 							<a href="../formulariosUsuarios/actualizar_usuarios.php?id_usuario_get=<?php echo $data_usuario['id_u']; ?>"><button type="button" class="btn btn-primary">Editar</button></a>
 
+							<a href="../formulariosUsuarios/eliminar_usuarios.php?id_usuario_get=<?php echo $data_usuario['id_u']; ?>"><button type="button" class=" button btn btn-primary">Eliminar</button></a>
+
 							<input type="hidden" id="php_id" value="<?php echo $id_u; ?>"/>
 						</td>
 						

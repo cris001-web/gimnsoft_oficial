@@ -1,9 +1,8 @@
 audio = new Audio("../alarma/alar.mp3");
 
-var n=0;
+
 	function Empezar(){
-	 n=1;
-	alert(n);
+	
 			audio.pause();
 			audio.currentTime=0;
 
@@ -17,8 +16,7 @@ var n=0;
 						this.play();
 					},false);
 					audio.play();
-					//setTimeout('Pausa_Alarma',20000);
-					ban=1;
+
 					$('#Tiempo').css('color', 'white');
 					$('#numm').css('background-color', 'rgb(226, 5, 36)');
 				},
