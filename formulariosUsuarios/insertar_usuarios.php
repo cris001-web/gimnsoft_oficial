@@ -86,11 +86,20 @@ include("../config/class.conexion.php");
 <link rel="stylesheet" type="text/css" href="../style/estilo_foto.css">
 <script src="../bootstrap4/js/jquery-3.4.1.min.js"></script>
 
+
+<!-- MENU -->
+	<link rel="stylesheet" type="text/css" href="../style/style_menu.css">
+	<link rel="stylesheet" type="text/css" href="../style/css/font-awesome.css">
+
+	<script src="../bootstrap4/js/jquery-3.4.1.min.js"></script>
+	<script src="../javascript/main_menu.js"></script>
+
 </head>
+<?php include("../menu.html"); ?>
 <body>
 <div class="container center-block" style="margin-top: 90px;">
 	<form action="insertar_usuarios.php" method="POST" style="box-shadow: 1px 2px 6px 0px black; height: 500px;width: 60%;
-    margin: auto;" enctype="multipart/form-data">
+    	margin: auto;" enctype="multipart/form-data">
 		<h2 class="text-white text-center" style="background: #6f6f6f">Insertar Usuarios</h2>
 
 		<div class="form-group mx-2 mt-3" >

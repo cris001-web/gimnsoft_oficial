@@ -5,7 +5,16 @@
 	<title>listar clientes</title>
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="../bootstrap4/css/bootstrap.min.css">
+
+	<!-- MENU -->
+	<link rel="stylesheet" type="text/css" href="../style/style_menu.css">
+	<link rel="stylesheet" type="text/css" href="../style/css/font-awesome.css">
+
+	<script src="../bootstrap4/js/jquery-3.4.1.min.js"></script>
+	<script src="../javascript/main_menu.js"></script>
 </head>
+<?php include("../menu.html"); ?>
+
 <body>
 <div class="container">
 	<table class="table">

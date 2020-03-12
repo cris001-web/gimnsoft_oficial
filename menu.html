@@ -2,54 +2,53 @@
 <html>
 <head>
 	<title></title>
-	<!-- bootstrap -->
-	<link rel="stylesheet" type="text/css" href="bootstrap4/css/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style/style_menu.css">
+	<link rel="stylesheet" type="text/css" href="style/css/font-awesome.css">
+
+	<script src="bootstrap4/js/jquery-3.4.1.min.js"></script>
+	<script src="javascript/main_menu.js"></script>
+
+
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light ">
-	<div class="container">
-		<a class="navbar-brand" href="#">Navbar</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+	<header>
+		<span id="button-menu" class="fa fa-bars" aria-hidden="true" ></span>
+		<nav class="navegacion">
+			<ul class="menu">
+				<li class="title-menu">Categorias</li>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Link</a>
-	      </li>
-	      <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Dropdown
-	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="#">Action</a>
-	          <a class="dropdown-item" href="#">Another action</a>
-	          <div class="dropdown-divider"></div>
-	          <a class="dropdown-item" href="#">Something else here</a>
-	        </div>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-	      </li>
-	    </ul>
-	    
-	  </div>
-	</div>
-	  
-</nav>
+				<li><a href="#"><span class="fa fa-home icon-menu"></span>Inicio</a></li>
 
+				<li class="item-submenu" menu="1">
+					<a href="#"><span class="fa fa-plus icon-menu" ></span> Agregar</a>
+					<ul class="submenu" >
+						<li class="title-menu"><span class="fa fa-plus icon-menu" ></span> Agregar</li>
+						<li class="go-back">Atras</li>
+						<li><a href="http://localhost/gimnsoftware/formulariosUsuarios/insertar_usuarios.php">Cliente</a></li>
+						<li><a href="http://localhost/gimnsoftware/formulariosRoles/insert.php">Rol</a></li>
+						<li><a href="#">Actividad</a></li>
+					</ul>
+				</li>
+				
+				
 
-<style type="text/css">
-	.navbar{
-		background: #117a8b;
-	}
-</style>
+				
 
-<!-- jquery bootstrap-->
-<script src="bootstrap4/js/jquery-3.4.1.min.js"></script>
+				<li class="item-submenu" menu="2">
+					<a href="#"><span class="fa fa-plus icon-menu" ></span> Listar</a>
+					<ul class="submenu" >
+						<li class="title-menu"><span class="fa fa-plus icon-menu" ></span>Listar</li>
+						<li class="go-back">Atras</li>
+						<li><a href="http://localhost/gimnsoftware/formulariosUsuarios/listar_usuario.php">Cliente</a></li>
+						<li><a href="http://localhost/gimnsoftware/formulariosRoles/listar.php">Rol</a></li>
+						<li><a href="#">Actividad</a></li>
+					</ul>
+				</li>	
+				</li>
+			</ul>
+		</nav>
+	</header>
 </body>
 </html>

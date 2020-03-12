@@ -1,7 +1,7 @@
 <?php
 
 $host='localhost';
-$basededatos='gimnsoft_2020';
+$basededatos='gimnsoft_php';
 $usuario='root';
 $pass='';
 
