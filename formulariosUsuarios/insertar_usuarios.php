@@ -1,12 +1,9 @@
 <?php 
 include("../config/class.conexion.php");
-	$query_select="SELECT rol_descripcion FROM roles";
-	$ejecutar=mysqli_query($conexion,$query_select);
-		$msj='';
+	
 		if (!empty($_POST)) {
 
-		
-
+			//obtengo valores de los inputs
 			$email=$_POST['email'];
 			$contraseña=md5($_POST['contraseña']);
 			$activo=$_POST['activo'];
@@ -15,10 +12,12 @@ include("../config/class.conexion.php");
 
 			$nombre=$_POST['nombre'];
 			$apellido=$_POST['apellido'];
+			$objetivo=$_POST['objetivo'];
 			$calle=$_POST['calle'];
 			$barrio=$_POST['barrio'];
-			$localidad=$_POST['localidad'];
-			//echo 'id'. $rol_id; id del rol seleccionado
+			$localidad_id=$_POST['localidad_id'];
+			$sexo_id=$_POST['sexo_id'];
+			
 			//verifico si el email ya esta registrado
 			$var_seguir=0;
 			$query_verifico=mysqli_query($conexion,"SELECT * FROM usuarios where email='$email' OR nombre_usuario='$nombre_usuario' ");
@@ -39,8 +38,11 @@ include("../config/class.conexion.php");
 						echo "GUARDADO USUARIO". '</br>';
 						//va seguir
 						if ($var_seguir==1) {
-							//selecciono id
-							$query_selectID=mysqli_query($conexion,"SELECT id FROM usuarios WHERE nombre_usuario='$nombre_usuario'");
+
+							echo "SELECT id_usuario FROM usuarios WHERE nombre_usuario='$nombre_usuario'".'<br>';
+
+							//selecciono id y guardo en variable
+							$query_selectID=mysqli_query($conexion,"SELECT id_usuario FROM usuarios WHERE nombre_usuario='$nombre_usuario'");
 								while ($select_id_usuario=mysqli_fetch_array($query_selectID)) {
 									$var_usuario_id=$select_id_usuario[0];
 									echo 'variable dekl usuario guardada id'.$var_usuario_id. '</br>';
@@ -54,11 +56,10 @@ include("../config/class.conexion.php");
 								move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_destino.$nombre_imagen);
 							
 								//inserto cliente con id de usuario
-								$query_insertar_cli=mysqli_query($conexion,"INSERT INTO clientes (nombre,apellido,calle,barrio,localidad,usuario_id,foto) VALUES ('$nombre','$apellido','$calle','$barrio','$localidad','$var_usuario_id','$nombre_imagen')");
+								$query_insertar_alumnos=mysqli_query($conexion,"INSERT INTO alumnos (nombre,apellido,objetivo,calle,barrio,localidad_id,usuario_id,sexo_id,foto) VALUES ('$nombre','$apellido','$objetivo','$calle','$barrio','$localidad_id','$var_usuario_id','$sexo_id','$nombre_imagen')");
 
-								echo("INSERT INTO clientes (nombre,apellido,calle,barrio,localidad,usuario_id) VALUES ('$nombre','$apellido','$calle','$barrio','$localidad','$var_usuario_id','$nombre_imagen')");
-
-								if ($query_insertar_cli) {
+								
+								if ($query_insertar_alumnos) {
 									echo('<p class="alert alert-success alert-success fade show">OPERACIÓN EXITOSA. GUARDADO EXISITOSAMENTE</p>');
 								}else{
 									echo('<p class="alert alert-warning alert-success fade show">OPERACIÓN SIN EXITO. NO SE PUDO GUARDAR</p>');
@@ -105,8 +106,11 @@ include("../config/class.conexion.php");
 		<div class="form-group mx-2 mt-3" >
 			
 			<input type="text" class="form-control " name="nombre_usuario" id="nombre_usuario" placeholder="Ingrese Nombre Usuario">
+
 			<input type="email" class="form-control " name="email" id="email" placeholder="Ingrese Correo Electronico valido">
+
 			<input type="password" class="form-control " name="contraseña" id="contraseña" placeholder="Ingrese Contraseña">
+			
 			<label><input type="checkbox" class="form-check-input ml-1 m" name="activo" id="activo" placeholder="estado" value="1" style="position: relative;"> Estado de la persona</label><br>
 			
 			
@@ -116,7 +120,7 @@ include("../config/class.conexion.php");
 				$query_rol=mysqli_query($conexion,"SELECT * FROM roles");
 				$filas_rol=mysqli_num_rows($query_rol);
 			 ?>
-			<label>Elegir</label>
+			<label>Elegir Roles</label>
 				<select class="form-control" name="rol_id" id="rol_id" >
 				  	<?php
 				  		if ($filas_rol>0) {
@@ -131,10 +135,54 @@ include("../config/class.conexion.php");
 			
 			
 			<input type="text" class="form-control " name="nombre" id="nombre" placeholder="Ingrese Nombre del Cliente">
+
 			<input type="text" class="form-control " name="apellido" id="apellido" placeholder="Ingrese apellido del Cliente">
+
+			<input type="text" class="form-control " name="objetivo" id="objetivo" placeholder="objetivo">
+
 			<input type="text" class="form-control " name="calle" id="calle" placeholder="Calle del cliente">
+
 			<input type="text" class="form-control " name="barrio" id="barrio" placeholder="Barrio del Cliente">
-			<input type="text" class="form-control " name="localidad" id="localidad" placeholder="Ingrese Ciudad del Cliente">
+
+
+			<?php 
+			include("../config/class.conexion.php");
+				$query_localidades=mysqli_query($conexion,"SELECT * FROM localidades");
+				$filas_localidades=mysqli_num_rows($query_localidades);
+			 ?>
+			<label>Elegir Localisdad</label>
+				<select class="form-control" name="localidad_id" id="localidad_id" >
+				  	<?php
+				  		if ($filas_localidades>0) {
+				  			while ($localidades= mysqli_fetch_array($query_localidades)) {
+				  				?>
+				  					<option value="<?php echo $localidades["id_localidad"] ?>" ><?php echo $localidades["id_localidad"] ?></option>
+				  				<?php	
+				  			}
+				  		}
+				  	?>
+				</select>
+
+
+			<?php 
+			include("../config/class.conexion.php");
+				$query_generos=mysqli_query($conexion,"SELECT * FROM generos");
+				$filas_generos=mysqli_num_rows($query_generos);
+			 ?>
+			<label>Elegir Genero</label>
+				<select class="form-control" name="sexo_id" id="sexo_id" >
+				  	<?php
+				  		if ($filas_generos>0) {
+				  			while ($generos= mysqli_fetch_array($query_generos)) {
+				  				?>
+				  					<option value="<?php echo $generos["id_sexo"] ?>" ><?php echo $generos["id_sexo"] ?></option>
+				  				<?php	
+				  			}
+				  		}
+				  	?>
+				</select>	
+
+
 			<div id="imagePreview" style="text-align: center;">
 				<img src="../imagen/users.png" >
 			</div>
